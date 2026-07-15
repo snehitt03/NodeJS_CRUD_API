@@ -1,6 +1,8 @@
 const express=require("express");
 const app=express();
 
+app.use(express.json());//needed for parsing the json files from the users(to take input)
+
 const PORT=3000;
 
 const tasks=[{"id":1,"title":"Learning Express","done":false},{"id":2,"title":"Build API","done":true}
@@ -32,6 +34,29 @@ app.get("/health",(req,res)=>{
     res.json({
         "status":"ok"
     });
+});
+
+app.post("/tasks",(req,res)=>{
+    const {title}=req.body;
+
+    if(!title || title.trim()==="")
+    {
+        res.status(404).json({
+            "error":"Title is required"
+        });
+    }
+
+    const nextId=tasks.length>0?Math.max(...tasks.map(task=>task.id))+1:1;
+
+    const newTask={
+        "id": nextId,
+        "title":title.trim(),
+        "done":false
+    }
+
+    tasks.push(newTask);
+
+    res.status(201).json(newTask);
 });
 
 app.listen(PORT,()=>{
