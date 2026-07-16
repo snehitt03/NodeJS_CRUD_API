@@ -1,0 +1,78 @@
+Microsoft Windows [Version 10.0.19045.6466]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\DELL>curl -i -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Buy Milk\"}"
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+ETag: W/"28-9vVjltvpdnv2purknMZG9437OJQ"
+Date: Thu, 16 Jul 2026 09:00:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":4,"title":"Buy Milk","done":false}
+C:\Users\DELL>curl -i -X PUT http://localhost:3000/tasks/4 -H "Content-Type: application/json" -d "{\"title\":\"Buy Bread\"}"
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 41
+ETag: W/"29-qSVkg2KtBS7Ty2w5/LI/Ffa8YEs"
+Date: Thu, 16 Jul 2026 09:01:22 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":4,"title":"Buy Bread","done":false}
+C:\Users\DELL>curl -i -X PUT http://localhost:3000/tasks/4 -H "Content-Type: application/json" -d "{\"done\":true}"
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+ETag: W/"28-BlXv9kIsfjSUiZmYMUbb5KklD5k"
+Date: Thu, 16 Jul 2026 09:03:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":4,"title":"Buy Bread","done":true}
+C:\Users\DELL>curl -i -X PUT http://localhost:3000/tasks/4 -H "Content-Type: application/json" -d "{\"title\":\"Buy Eggs\",\"done\":false}"
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+ETag: W/"28-eLf0EuHVrsGKPzn+pNuhXg5X45s"
+Date: Thu, 16 Jul 2026 09:04:14 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":4,"title":"Buy Eggs","done":false}
+C:\Users\DELL>curl -i -X PUT http://localhost:3000/tasks/4 -H "Content-Type: application/json" -d "{}"
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 51
+ETag: W/"33-lMj6/VQ79hgOFLgwepNqxBSoXqE"
+Date: Thu, 16 Jul 2026 09:05:19 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Provide a valid title and/or done value"}
+C:\Users\DELL>curl -i -X PUT http://localhost:3000/tasks/99 -H "Content-Type: application/json" -d "{\"done\":true}"
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 29
+ETag: W/"1d-kQQdPQ+i/Wk9IgXh55Kh5auGltk"
+Date: Thu, 16 Jul 2026 09:05:43 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Task 99 not found"}
+C:\Users\DELL>curl -i -X DELETE http://localhost:3000/tasks/4
+HTTP/1.1 204 No Content
+X-Powered-By: Express
+Date: Thu, 16 Jul 2026 09:06:19 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+C:\Users\DELL>
